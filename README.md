@@ -21,7 +21,7 @@
   evaluates -> (2+4i)*(2-8i)+(9-81i)
 
   prints -> 45.0-89.0i
-### Power
+#### Power
     import mathpy as mp
     str(mp.cal('(0.4+0.9i)^(4)'))
   evaluates -> (0.4+0.9i)<sup>4</sup>
@@ -35,7 +35,7 @@
   evaluates -> x<sup>2</sup>+4 with x -> 2<sup>4</sup>
                      
   prints -> 36.0
-### Multiple
+#### Multiple
     import mathpy as mp
     str(mp.equation('(((x)^(2))+((y)^(2)))-(8);(1+i)^(2),2-i'))
   evaluates -> x<sup>2</sup> + y<sup>2</sup> - 8 with x -> (1+i)<sup>2</sup> and y -> (2-i)
