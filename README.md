@@ -1,7 +1,7 @@
 # Mathpy
 
 ## Prerequisites
-### Python 2
+### Python 2 & Python 3
 ### Install ply using
     pip install ply
 
