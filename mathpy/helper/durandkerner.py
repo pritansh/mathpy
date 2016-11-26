@@ -1,6 +1,4 @@
 import functools as ft
-from mathpy.grammar.complex.parser import parser as cmpx
-from mathpy.grammar.paranthesis.parser import parser as paran
 
 def durandkerner(eq, root, equation, show=False):
     roots = []

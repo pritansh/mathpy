@@ -1,7 +1,6 @@
 import re
 from mathpy.grammar.complex.parser import parser as cmpx
 from mathpy.grammar.paranthesis.parser import parser as paran
-from mathpy.helper.durandkerner import durandkerner
 
 def cal(s):
     s = paran.parse(s)
@@ -26,13 +25,3 @@ def equation(s):
     except ValueError:
         pass
     return result
-
-def dk(s, showIter=False):
-    res = paran.parse(s)
-    eq = res.split(';')
-    root = []
-    for i in range(0, int(eq[1])):
-        root.append(cal('(0.4+0.9j)^' + str(i)))
-    root = durandkerner(eq[0], root, equation, showIter)
-    root = [complex(round(e.real, 2), round(e.imag, 2)) for e in root]
-    return root
