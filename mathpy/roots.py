@@ -4,17 +4,20 @@ from mathpy.helper.regulafalsi import regulafalsi
 from mathpy.grammar.paranthesis.parser import parser as paran
 from mathpy.mt import cal, equation
 
-def dk(s, showIter=False):
+def dk(s, maxIter=100, showIter=False):
     res = paran.parse(s)
     eq = res.split(';')
     root = []
     for i in range(0, int(eq[1])):
         root.append(cal('(0.4+0.9j)^' + str(i)))
-    root = durandkerner(eq[0], root, equation, showIter)
-    root = [complex(round(e.real, 2), round(e.imag, 2)) for e in root]
-    return root
+    root = durandkerner(eq[0], root, equation, maxIter, showIter)
+    if isinstance(root, str):
+        return root
+    else:
+        root = [complex(round(e.real, 2), round(e.imag, 2)) for e in root]
+        return root
 
-def bm(s, a, b, showIter=False):
+def bm(s, a, b, maxIter=100, showIter=False):
     res = paran.parse(s)
     aval = equation(res + ';' + str(a))
     bval = equation(res + ';' + str(b))
@@ -23,11 +26,14 @@ def bm(s, a, b, showIter=False):
     elif aval.real < 0 and bval.real < 0:
         return 'Wrong values of a and b'
     else:
-        root = bisectionmethod(res, a, b, equation, showIter)
-        root = round(root, 4)
-        return root
+        root = bisectionmethod(res, a, b, equation, maxIter, showIter)
+        if isinstance(root, str):
+            return root
+        else:
+            root = round(root, 4)
+            return root
 
-def rf(s, a, b, showIter=False):
+def rf(s, a, b, maxIter=100, showIter=False):
     res = paran.parse(s)
     aval = equation(res + ';' + str(a))
     bval = equation(res + ';' + str(b))
@@ -36,6 +42,9 @@ def rf(s, a, b, showIter=False):
     elif aval.real < 0 and bval.real < 0:
         return 'Wrong values of a and b'
     else:
-        root = regulafalsi(res, a, b, equation, showIter)
-        root = round(root, 4)
-        return root
+        root = regulafalsi(res, a, b, equation, maxIter, showIter)
+        if isinstance(root, str):
+            return root
+        else:
+            root = round(root, 4)
+            return root
