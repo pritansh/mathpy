@@ -24,7 +24,7 @@ def bm(s, a, b, showIter=False):
         return 'Wrong values of a and b'
     else:
         root = bisectionmethod(res, a, b, equation, showIter)
-        root = complex(round(root.real, 4), round(root.imag, 4))
+        root = round(root, 4)
         return root
 
 def rf(s, a, b, showIter=False):
@@ -37,5 +37,5 @@ def rf(s, a, b, showIter=False):
         return 'Wrong values of a and b'
     else:
         root = regulafalsi(res, a, b, equation, showIter)
-        root = complex(round(root.real, 4), round(root.imag, 4))
+        root = round(root, 4)
         return root

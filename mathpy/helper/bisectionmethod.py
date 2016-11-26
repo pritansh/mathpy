@@ -8,7 +8,7 @@ def bisectionmethod(eq, a, b, equation, showIter=False):
         aval = equation(eq + ';' + str(a))
         bval = equation(eq + ';' + str(b))
         cval = equation(eq + ';' + str(c))
-        iterations.append([a, b, c, cval])
+        iterations.append([a, b, c, cval.real])
         if cval.real < 0:
             if bval.real < 0:
                 b = c

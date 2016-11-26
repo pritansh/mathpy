@@ -10,7 +10,7 @@ def regulafalsi(eq, a, b, equation, showIter=False):
         c = c.real
         cval = equation(eq + ';' + str(c))
         r = aval * cval
-        iterations.append([a, b, c, r])
+        iterations.append([a, b, c, r.real])
         if r.real < 0:
             b = c
         else:
@@ -26,5 +26,7 @@ def regulafalsi(eq, a, b, equation, showIter=False):
                     print('    ' + str(i) + '\t\t'),
                     for j in range(0, 4):
                         print('{0:.4f}'.format(iterations[i][j]) + '\t'),
+                        if j == 2:
+                            print('  '),
                     print('') 
             return root
