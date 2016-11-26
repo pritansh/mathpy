@@ -24,14 +24,14 @@ def p_complex(t):
             indx = val.index('-', 1)
             v.append(val[:indx])
             v.append(val[indx:])
-    v[1] = v[1].split('i')[0]
+    v[1] = v[1].split('j')[0]
     if v[1] == '-' or v[1] == '':
         v[1]+= '1' 
     t[0] = complex(float(v[0]), float(v[1]))
 
 def p_imag(t):
     'e : IMAG'
-    val = t[1].split('i')[0]
+    val = t[1].split('j')[0]
     if val == '-' or val == '':
         val+= '1'
     t[0] = complex(0, float(val))
