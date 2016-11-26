@@ -1,6 +1,6 @@
 import re
-from grammar.complex.parser import parser as cmpx
-from grammar.equation.parser import parser as eq
+from mathpy.grammar.complex.parser import parser as cmpx
+from mathpy.grammar.equation.parser import parser as eq
 
 def cal(s):
     result = cmpx.parse(s)
