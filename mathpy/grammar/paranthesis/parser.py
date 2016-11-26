@@ -1,9 +1,17 @@
 import ply.yacc as yacc
-from mathpy.grammar.equation.lexer import tokens
+from mathpy.grammar.paranthesis.lexer import tokens
+
+precedence = (
+    ('nonassoc', 'NUMBER'),
+    ('left', 'PLUS', 'MINUS'),
+    ('left', 'MUL', 'DIV'),
+    ('right', 'POW'),
+    ('nonassoc', 'COMPLEX')
+    )
 
 def p_b(t):
     'e : LP e RP'
-    t[0] = t[1] + t[2] + t[3]
+    t[0] = t[2]
 
 def p_id(t):
     'e : ID'
@@ -11,20 +19,20 @@ def p_id(t):
 
 def p_complex(t):
     'e : COMPLEX'
-    t[0] = t[1]
+    t[0] = '(' + t[1] + ')'
 
 def p_imag(t):
     'e : IMAG'
-    t[0] = t[1]
+    t[0] = '(' + t[1] + ')'
 
 def p_exp(t):
-    '''e : LP e RP PLUS LP e RP
-         | LP e RP MINUS LP e RP
-         | LP e RP MUL LP e RP
-         | LP e RP DIV LP e RP
-         | LP e RP POW LP e RP
+    '''e : e POW e
+         | e PLUS e
+         | e MINUS e
+         | e MUL e
+         | e DIV e
     '''
-    t[0] = t[1] + t[2] + t[3] + t[4] + t[5] + t[6] + t[7]
+    t[0] = '(' + t[1] + ')' + t[2] + '(' + t[3] + ')'
 
 def p_val(t):
     '''e : e SC g
