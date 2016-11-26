@@ -160,7 +160,7 @@
   Find 1 root for -> x<sup>3</sup>-x-2 in (1, 2)
 
     import mathpy as mp
-    mp.bm('x^3-x+(-2)', a=1, b=2, showIter=True)
+    mp.rf('x^3-x+(-2)', a=1, b=2, showIter=True)
 
     Iterations        a       b       c       f(a)*f(c)
         0           1.0000  2.0000  1.3333  1.9259-0.0000j
