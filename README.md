@@ -52,16 +52,19 @@
 ### Roots Finder
 #### All roots (Durand Kerner)
   Examples
+
     import mathpy as mp
     mp.roots('x^2+2*x+1;2')
   find roots for -> x<sup>2</sup>2+2x+1 and degree -> 2
 
   prints -> [(-1-0j), (-1+0j)]
+
     import mathpy as mp
     mp.roots('x^2+(-2)*x+1;2')
   find roots for -> x<sup>2</sup>2-2x+1 and degree -> 2
 
   prints -> [(1+0j), (1-0j)]
+  
     import mathpy as mp
     mp.roots('x^8+1;8')
   find roots for -> x<sup>8</sup>2+1 and degree -> 8
