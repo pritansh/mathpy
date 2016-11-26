@@ -7,10 +7,14 @@ class Complex:
         self.imag = imag
 
     def __str__(self):
+        msg = str(round(self.real, 5))
         if self.imag != 0:
-            return 'real: ' + str(round(self.real, 2)) + ', imag: ' + str(round(self.imag, 2))
-        else:
-            return str(self.real)
+            if self.imag > 0:
+                msg += '+'
+            elif self.imag == 0:
+                return msg
+            msg += str(round(self.imag, 5)) + 'i'
+        return msg
 
     def conj(self):
         return Complex(self.real, -self.imag)
@@ -39,7 +43,7 @@ class Complex:
     def div(self, cpx):
         denom = cpx.real * cpx.real + cpx.imag * cpx.imag
         m = self.mul(cpx.conj())
-        return Complex(m.real, m.imag)
+        return Complex(m.real/denom, m.imag/denom)
 
     def pow(self, exp):
         mod = math.sqrt(self.real * self.real + self.imag * self.imag)

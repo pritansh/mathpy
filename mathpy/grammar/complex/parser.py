@@ -1,41 +1,12 @@
-import re
-from mathpy.helper.Complex import Complex
-import ply.lex as lex
-
-tokens = (
-    'IMAG', 'NUMBER', 'COMPLEX', 'PLUS', 'MINUS', 'LP', 'RP',
-    'MUL', 'DIV', 'POW'
-    )
-
-t_LP = r'\('
-t_RP = r'\)'
-t_PLUS = r'\+'
-t_MINUS = r'-'
-t_MUL = r'\*'
-t_DIV = r'/'
-t_POW = r'\^'
-t_COMPLEX = r'(|-)[0-9]*\.{0,1}[0-9]+[+|-](|[0-9]*\.{0,1}[0-9]+)i'
-t_IMAG = r'(|-)(|[0-9]*\.{0,1}[0-9]+)i'
-t_NUMBER = r'(|-)[0-9]*\.{0,1}[0-9]+'
-
-def t_newline(t):
-    r'\n+'
-    t.lexer.lineno += len(t.value)
-
-t_ignore = ' \t'
-
-def t_error(t):
-    print('Illegal character', t)
-    t.lexer.skip(1)
-
-lexer = lex.lex()
-
 import ply.yacc as yacc
+from mathpy.helper.Complex import Complex
+from mathpy.grammar.complex.lexer import tokens
 
 precedence = (
     ('left', 'PLUS', 'MINUS'),
     ('left', 'MUL', 'DIV'),
-    ('right', 'POW')
+    ('right', 'POW'),
+    ('nonassoc', 'COMPLEX')
     )
 
 def p_b(t):
@@ -50,23 +21,20 @@ def p_complex(t):
         if val.index('+', 1):
             v = val.split('+')
     except ValueError:
-        try:
-            if val.index('-', 1):
-                indx = val.index('-', 1)
-                v.append(val[:indx])
-                v.append(val[indx+1:])
-        except ValueError:
-            pass
+        if val.index('-', 1):
+            indx = val.index('-', 1)
+            v.append(val[:indx])
+            v.append(val[indx:])
     v[1] = v[1].split('i')[0]
-    if v[1] == '':
-        v[1] = '1'
+    if v[1] == '-' or v[1] == '':
+        v[1]+= '1' 
     t[0] = Complex(float(v[0]), float(v[1]))
 
 def p_imag(t):
     'e : IMAG'
     val = t[1].split('i')[0]
-    if val == '':
-        val = '1'
+    if val == '-' or val == '':
+        val+= '1'
     t[0] = Complex(0, float(val))
 
 def p_expr(t):
