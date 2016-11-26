@@ -27,12 +27,12 @@ def equation(s):
         pass
     return result
 
-def roots(s):
+def dk(s, showIter=False):
     res = paran.parse(s)
     eq = res.split(';')
     root = []
     for i in range(0, int(eq[1])):
         root.append(cal('(0.4+0.9j)^' + str(i)))
-    root = durandkerner(eq[0], root, equation)
+    root = durandkerner(eq[0], root, equation, showIter)
     root = [complex(round(e.real, 2), round(e.imag, 2)) for e in root]
     return root

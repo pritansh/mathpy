@@ -51,22 +51,34 @@
 
 ### Roots Finder
 #### All roots (Durand Kerner)
+  Function name -> dk(string, showIter)
+  
+  string -> 'equation;degree'
+  showIter -> Default(False)
+              Display all iterations(True)
+
   Examples
 
     import mathpy as mp
-    print(mp.roots('x^2+2*x+1;2'))
+    print(mp.dk('x^2+2*x+1;2'))
   find roots for -> x<sup>2</sup>+2x+1 and degree -> 2
 
   prints -> [(-1-0j), (-1+0j)]
 
     import mathpy as mp
-    print(mp.roots('x^2+(-2)*x+1;2'))
+    print(mp.dk('x^2+(-2)*x+1;2', showIter=True))
   find roots for -> x<sup>2</sup>-2x+1 and degree -> 2
 
-  prints -> [(1+0j), (1-0j)]
+  prints ->
+  
+    Iterations            root0                  root1
+        0            1.0000+0.0000j          0.4000+0.9000j
+        1            1.0000+0.0000j          0.4000+0.9000j
+        2            1.0000+0.0000j          1.0000+-0.0000j
+  [(1+0j), (1-0j)]
   
     import mathpy as mp
-    print(mp.roots('x^8+1;8'))
+    print(mp.dk('x^8+1;8'), show)
   find roots for -> x<sup>8</sup>+1 and degree -> 8
 
   prints -> [(0.38-0.92j), (0.38+0.92j), (-0.92+0.38j), (-0.92-0.38j), (-0.38-0.92j), (0.92-0.38j), (0.92+0.38j), (-0.38+0.92j)]
