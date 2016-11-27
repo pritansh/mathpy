@@ -25,3 +25,30 @@ def equation(s):
     except ValueError:
         pass
     return result
+
+from plotly import tools
+from plotly.offline import plot as ply
+import plotly.graph_objs as go
+
+def plot(s, min=-100.0, max=100.0, name='Plot', val=[], valname='vals'):
+    step = 0.5
+    x = []
+    y = []
+    t = min
+    while t != max:
+        x.append(t)
+        t+= step
+    for e in x:
+        v = equation(s + ';' + str(e))
+        y.append(v.real)
+    t = go.Scatter(x=x, y=y, mode='lines', name=s + ' ' + name)
+    data = [t]
+    if len(val) != 0:
+        t1 = go.Scatter(x=val[0], y=val[1], mode='markers', name=valname)
+        fig = tools.make_subplots(rows=1, cols=2, subplot_titles=(name + ' Plot', valname + ' Plot'))
+        fig.append_trace(t, 1, 1)
+        fig.append_trace(t1, 1, 2)
+        fig['layout'].update(title=name + ' and ' + valname + ' Plots')
+        ply(fig, filename='plots/' + name + ' and ' + valname + ' Plots.html')
+    else:
+        ply(data, filename='plots/' + s + ' ' + name + '.html')

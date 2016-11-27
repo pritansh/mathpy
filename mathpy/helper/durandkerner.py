@@ -15,7 +15,7 @@ def durandkerner(eq, root, equation, maxIter=100, showIter=False):
             t1 = [complex(round(e.real, 4), round(e.imag, 4)) for e in root]
             t2 = [complex(round(e.real, 4), round(e.imag, 4)) for e in roots]
             if t1 == t2:
-                if show == True:
+                if showIter == True:
                     printIterations(iterations, root)                   
                 return t2
             root = t2

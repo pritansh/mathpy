@@ -2,9 +2,9 @@ from mathpy.helper.durandkerner import durandkerner
 from mathpy.helper.bisectionmethod import bisectionmethod
 from mathpy.helper.regulafalsi import regulafalsi
 from mathpy.grammar.paranthesis.parser import parser as paran
-from mathpy.mt import cal, equation
+from mathpy.mt import cal, equation, plot
 
-def dk(s, maxIter=100, showIter=False):
+def dk(s, maxIter=100, showIter=False, plotGraph=False):
     res = paran.parse(s)
     eq = res.split(';')
     root = []
@@ -15,9 +15,15 @@ def dk(s, maxIter=100, showIter=False):
         return root
     else:
         root = [complex(round(e.real, 2), round(e.imag, 2)) for e in root]
+        vals = []
+        if plotGraph == True:
+            x = [e.real for e in root]
+            y = [e.imag for e in root]
+            vals = [x, y]
+            plot(eq[0], name=s.split(';')[0], val=vals, valname='Roots (Durand Kerner Method)')
         return root
 
-def bm(s, a, b, maxIter=100, showIter=False):
+def bm(s, a, b, maxIter=100, showIter=False, plotGraph=False):
     res = paran.parse(s)
     aval = equation(res + ';' + str(a))
     bval = equation(res + ';' + str(b))
@@ -31,9 +37,13 @@ def bm(s, a, b, maxIter=100, showIter=False):
             return root
         else:
             root = round(root, 4)
+            vals = []
+            if plotGraph == True:
+                vals = [[root], [0]]
+                plot(res, name=s, val=vals, valname='Root (Bisection Method)')
             return root
 
-def rf(s, a, b, maxIter=100, showIter=False):
+def rf(s, a, b, maxIter=100, showIter=False, plotGraph=False):
     res = paran.parse(s)
     aval = equation(res + ';' + str(a))
     bval = equation(res + ';' + str(b))
@@ -47,4 +57,8 @@ def rf(s, a, b, maxIter=100, showIter=False):
             return root
         else:
             root = round(root, 4)
+            vals = []
+            if plotGraph == True:
+                vals = [[root], [0]]
+                plot(res, name=s, val=vals, valname='Roots (Regula Falsi Method)')
             return root
