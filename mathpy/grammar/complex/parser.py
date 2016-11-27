@@ -1,9 +1,9 @@
 import ply.yacc as yacc
-import cmath, math
+import cmath
 from mathpy.grammar.complex.lexer import tokens
 
 precedence = (
-    ('nonassoc', 'SINE', 'COSINE', 'SECANT', 'COSECANT', 'TANGENT', 'COTANGENT', 'LOG', 'EXP'),
+    ('nonassoc', 'SINE', 'COSINE', 'SECANT', 'COSECANT', 'TANGENT', 'COTANGENT', 'LOG', 'EXP', 'ARCSINE', 'ARCCOSINE', 'ARCTANGENT', 'SINEH', 'COSINEH', 'TANGENTH', 'ARCSINEH', 'ARCCOSINEH', 'ARCTANGENTH'),
     ('left', 'PLUS', 'MINUS'),
     ('left', 'MUL', 'DIV'),
     ('right', 'POW'),
@@ -66,6 +66,15 @@ def p_sine(t):
          | LOG LP e COMMA e RP
          | LN LP e RP
          | EXP POW LP e RP
+         | ARCSINE LP e RP
+         | ARCCOSINE LP e RP
+         | ARCTANGENT LP e RP
+         | SINEH LP e RP
+         | COSINEH LP e RP
+         | TANGENTH LP e RP
+         | ARCSINEH LP e RP
+         | ARCCOSINEH LP e RP
+         | ARCTANGENTH LP e RP
     '''
     if t[1] == 'sin':
         t[0] = cmath.sin(t[3])
@@ -82,9 +91,27 @@ def p_sine(t):
     elif t[1] == 'log':
         t[0] = cmath.log(t[3], t[5])
     elif t[1] == 'ln':
-        t[0] = cmath.log(t[3], math.e)
+        t[0] = cmath.log(t[3], cmath.e)
     elif t[1] == 'e':
         t[0] = cmath.exp(t[4])
+    elif t[1] == 'asin':
+        t[0] = cmath.asin(t[3])
+    elif t[1] == 'acos':
+        t[0] = cmath.acos(t[3])
+    elif t[1] == 'atan':
+        t[0] = cmath.atan(t[3])
+    elif t[1] == 'sinh':
+        t[0] = cmath.sinh(t[3])
+    elif t[1] == 'cosh':
+        t[0] = cmath.cosh(t[3])
+    elif t[1] == 'tanh':
+        t[0] = cmath.tanh(t[3])
+    elif t[1] == 'asinh':
+        t[0] = cmath.asinh(t[3])
+    elif t[1] == 'acosh':
+        t[0] = cmath.acosh(t[3])
+    elif t[1] == 'atanh':
+        t[0] = cmath.atanh(t[3])
 
 def p_number(t):
     'e : NUMBER'

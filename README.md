@@ -44,11 +44,23 @@
 #### Trignometric
   sin, cos, cosec, sec, tan, cot
 
+  asin, acos, atan
+
+  sinh, cosh, tanh
+
+  asinh, acosh, atanh
+
   Evaluates -> sin(cos((0.4+0.9j)^<sup>2</sup>))
 
     print(mp.cal('sin(cos((0.4+0.9j)^2))'))
 
     (0.9447989936113714+0.26124290303222564j)
+
+  Evaluates -> sinh(acosh(acos(tan((0.45+9.8j)^<sup>3</sup>))))
+
+    print(mp.cal('sinh(acosh(acos(tan((0.45+9.8j)^3))))'))
+
+    (1.3312243736150495+1.0399887655788103j)
 
 #### Logarithmic
   ln -> Natural Log

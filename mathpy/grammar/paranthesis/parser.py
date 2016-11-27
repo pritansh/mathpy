@@ -3,7 +3,7 @@ from mathpy.grammar.paranthesis.lexer import tokens
 
 precedence = (
     ('nonassoc', 'NUMBER'),
-    ('nonassoc', 'SINE', 'COSINE', 'SECANT', 'COSECANT', 'TANGENT', 'COTANGENT', 'LOG', 'EXP'),
+    ('nonassoc', 'SINE', 'COSINE', 'SECANT', 'COSECANT', 'TANGENT', 'COTANGENT', 'LOG', 'EXP', 'ARCSINE', 'ARCCOSINE', 'ARCTANGENT', 'SINEH', 'COSINEH', 'TANGENTH', 'ARCSINEH', 'ARCCOSINEH', 'ARCTANGENTH'),
     ('left', 'PLUS', 'MINUS'),
     ('left', 'MUL', 'DIV'),
     ('right', 'POW'),
@@ -45,6 +45,15 @@ def p_sine(t):
          | LOG LP e COMMA e RP
          | LN LP e RP
          | EXP POW LP e RP
+         | ARCSINE LP e RP
+         | ARCCOSINE LP e RP
+         | ARCTANGENT LP e RP
+         | SINEH LP e RP
+         | COSINEH LP e RP
+         | TANGENTH LP e RP
+         | ARCSINEH LP e RP
+         | ARCCOSINEH LP e RP
+         | ARCTANGENTH LP e RP
     '''
     if t[1] == 'sin':
         t[0] = t[1] + t[2]+ t[3] + t[4]
@@ -64,6 +73,24 @@ def p_sine(t):
         t[0] = t[1] + t[2] + t[3] + t[4]
     elif t[1] == 'e':
         t[0] = t[1] + t[2]+ t[3] + t[4] + t[5]
+    elif t[1] == 'asin':
+        t[0] = t[1] + t[2]+ t[3] + t[4]
+    elif t[1] == 'acos':
+        t[0] = t[1] + t[2]+ t[3] + t[4]
+    elif t[1] == 'atan':
+        t[0] = t[1] + t[2]+ t[3] + t[4]
+    elif t[1] == 'sinh':
+        t[0] = t[1] + t[2]+ t[3] + t[4]
+    elif t[1] == 'cosh':
+        t[0] = t[1] + t[2]+ t[3] + t[4]
+    elif t[1] == 'tanh':
+        t[0] = t[1] + t[2]+ t[3] + t[4]
+    elif t[1] == 'asinh':
+        t[0] = t[1] + t[2]+ t[3] + t[4]
+    elif t[1] == 'acosh':
+        t[0] = t[1] + t[2]+ t[3] + t[4]
+    elif t[1] == 'atanh':
+        t[0] = t[1] + t[2]+ t[3] + t[4]
 
 def p_val(t):
     '''e : e SC g

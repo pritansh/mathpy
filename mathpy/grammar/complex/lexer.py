@@ -3,7 +3,9 @@ import ply.lex as lex
 tokens = (
     'IMAG', 'NUMBER', 'COMPLEX', 'PLUS', 'MINUS', 'LP', 'RP',
     'MUL', 'DIV', 'POW', 'SINE', 'COSINE', 'SECANT', 'COSECANT',
-    'TANGENT', 'COTANGENT', 'LOG', 'LN', 'EXP', 'COMMA'
+    'TANGENT', 'COTANGENT', 'LOG', 'LN', 'EXP', 'COMMA', 'ARCSINE', 
+    'ARCCOSINE', 'ARCTANGENT', 'SINEH', 'COSINEH', 'TANGENTH', 
+    'ARCSINEH', 'ARCCOSINEH', 'ARCTANGENTH'
     )
 
 t_LP = r'\('
@@ -18,6 +20,15 @@ t_COTANGENT = r'cot'
 t_LOG = r'log'
 t_LN = r'ln'
 t_EXP = r'e'
+t_ARCSINE = r'asin'
+t_ARCCOSINE = r'acos'
+t_ARCTANGENT = r'atan'
+t_SINEH = r'sinh'
+t_COSINEH = r'cosh'
+t_TANGENTH = r'tanh'
+t_ARCSINEH = r'asinh'
+t_ARCCOSINEH = r'acosh'
+t_ARCTANGENTH = r'atanh'
 t_COMPLEX = r'(|-)[0-9]*\.{0,1}[0-9]+[\+|-](|[0-9]*\.{0,1}[0-9]+)j'
 t_IMAG = r'(|-)(|[0-9]*\.{0,1}[0-9]+)j'
 t_NUMBER = r'(|-)[0-9]*\.{0,1}[0-9]+'

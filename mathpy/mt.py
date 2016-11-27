@@ -12,7 +12,7 @@ def equation(s):
     try:
         if result.index(';'):
             parts = result.split(';')
-            chars = re.findall(r'(?![sin|cos|sec|cosec|tan|cot|log|ln|e|j])[a-zA-Z][0-9a-zA-Z]*', parts[0])
+            chars = re.findall(r'(?![sin|cos|sec|cosec|tan|cot|log|ln|e|asin|acos|atan|sinh|cosh|tanh|asinh|acosh|atanh|j])[a-zA-Z][0-9a-zA-Z]*', parts[0])
             unique = sorted(set(chars), key=chars.index)
             vals = parts[1].split(',')
             for i in range(0, len(unique)):
