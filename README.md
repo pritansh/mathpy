@@ -222,7 +222,8 @@
     'Not able to find roots'
 
   Find all roots for -> x<sup>8</sup>+1 and degree -> 8
-  Plots equation and roots in browser and automatically show the plot.
+
+  Plots equation and roots in browser and automatically show the plot
 
     print(mp.dk('x^8+1;8', showIter=True, plotGraph=True))
 
@@ -284,7 +285,8 @@
     1.5214
 
   Find 1 root for -> x<sup>3</sup>+sin(x)+ln(x)+2 in (0.1, 0.2)
-  Plots equation and root in browser and automatically show the plot.
+
+  Plots equation and root in browser and automatically show the plot
 
     print(mp.bm('x^3+sin(x)+ln(x)+2', a=0.1, b=0.2, maxIter=12, showIter=True, plotGraph=True))
 
@@ -325,7 +327,8 @@
 ##### Examples
 
   Find 1 root for -> x<sup>3</sup>-x-2 in (1, 2)
-  Plots equation and root in browser and automatically show the plot. 
+
+  Plots equation and root in browser and automatically show the plot
 
     print(mp.rf('x^3-x+(-2)', a=1, b=2, showIter=True, plotGraph=True))
 
