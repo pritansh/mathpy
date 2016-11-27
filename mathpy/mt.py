@@ -8,7 +8,7 @@ import os
 
 try:
     os.mkdir('plots')
-except WindowsError:
+except OSError:
     pass
 
 def cal(s):
