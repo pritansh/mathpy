@@ -1,6 +1,15 @@
 import re
 from mathpy.grammar.complex.parser import parser as cmpx
 from mathpy.grammar.paranthesis.parser import parser as paran
+from plotly import tools
+from plotly.offline import plot as ply
+import plotly.graph_objs as go
+import os
+
+try:
+    os.mkdir('plots')
+except WindowsError:
+    pass
 
 def cal(s):
     s = paran.parse(s)
@@ -25,10 +34,6 @@ def equation(s):
     except ValueError:
         pass
     return result
-
-from plotly import tools
-from plotly.offline import plot as ply
-import plotly.graph_objs as go
 
 def plot(s, min=-100.0, max=100.0, name='Plot', val=[], valname='vals'):
     step = 0.5
