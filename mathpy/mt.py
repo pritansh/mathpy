@@ -1,6 +1,10 @@
 import re
+from mathpy.grammar.complex.lexer import lexer as cmpxlex
+from mathpy.grammar.paranthesis.lexer import lexer as paranlex
+from mathpy.grammar.differentiation.lexer import lexer as dfrtnlex
 from mathpy.grammar.complex.parser import parser as cmpx
 from mathpy.grammar.paranthesis.parser import parser as paran
+from mathpy.grammar.differentiation.parser import parser as dfrtn
 from plotly import tools
 from plotly.offline import plot as ply
 import plotly.graph_objs as go
@@ -12,12 +16,18 @@ except OSError:
     pass
 
 def cal(s):
-    s = paran.parse(s)
-    result = cmpx.parse(s)
+    s = paran.parse(s, lexer=paranlex)
+    result = cmpx.parse(s, lexer=cmpxlex)
+    return result
+
+def diff(s):
+    s = paran.parse(s, lexer=paranlex)
+    print(s)
+    result = dfrtn.parse(s, lexer=dfrtnlex)
     return result
 
 def equation(s):
-    result = paran.parse(s)
+    result = paran.parse(s, lexer=paranlex)
     try:
         if result.index(';'):
             parts = result.split(';')
@@ -25,11 +35,11 @@ def equation(s):
             unique = sorted(set(chars), key=chars.index)
             vals = parts[1].split(',')
             for i in range(0, len(unique)):
-                vals[i] = str(cmpx.parse(vals[i]))
+                vals[i] = str(cmpx.parse(vals[i], lexer=cmpxlex))
                 vals[i] = vals[i].replace('(', '')
                 vals[i] = vals[i].replace(')', '')
                 parts[0] = parts[0].replace(unique[i], vals[i])
-            res = cmpx.parse(parts[0])
+            res = cmpx.parse(parts[0], lexer=cmpxlex)
             return res
     except ValueError:
         pass

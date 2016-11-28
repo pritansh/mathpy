@@ -1,11 +1,12 @@
 from mathpy.helper.durandkerner import durandkerner
 from mathpy.helper.bisectionmethod import bisectionmethod
 from mathpy.helper.regulafalsi import regulafalsi
+from mathpy.grammar.paranthesis.lexer import lexer as paranlex
 from mathpy.grammar.paranthesis.parser import parser as paran
 from mathpy.mt import cal, equation, plot
 
 def dk(s, maxIter=100, showIter=False, plotGraph=False):
-    res = paran.parse(s)
+    res = paran.parse(s, lexer=paranlex)
     eq = res.split(';')
     root = []
     for i in range(0, int(eq[1])):
@@ -24,7 +25,7 @@ def dk(s, maxIter=100, showIter=False, plotGraph=False):
         return root
 
 def bm(s, a, b, maxIter=100, showIter=False, plotGraph=False):
-    res = paran.parse(s)
+    res = paran.parse(s, lexer=paranlex)
     aval = equation(res + ';' + str(a))
     bval = equation(res + ';' + str(b))
     if aval.real > 0 and bval.real > 0:
@@ -44,7 +45,7 @@ def bm(s, a, b, maxIter=100, showIter=False, plotGraph=False):
             return root
 
 def rf(s, a, b, maxIter=100, showIter=False, plotGraph=False):
-    res = paran.parse(s)
+    res = paran.parse(s, lexer=paranlex)
     aval = equation(res + ';' + str(a))
     bval = equation(res + ';' + str(b))
     if aval.real > 0 and bval.real > 0:
