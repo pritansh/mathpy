@@ -5,6 +5,7 @@ from mathpy.grammar.differentiation.lexer import lexer as dfrtnlex
 from mathpy.grammar.complex.parser import parser as cmpx
 from mathpy.grammar.paranthesis.parser import parser as paran
 from mathpy.grammar.differentiation.parser import parser as dfrtn
+from mathpy.helper.derivative import Derivative, Node, AST, differentiate
 from plotly import tools
 from plotly.offline import plot as ply
 import plotly.graph_objs as go
@@ -22,9 +23,11 @@ def cal(s):
 
 def diff(s):
     s = paran.parse(s, lexer=paranlex)
-    print(s)
     result = dfrtn.parse(s, lexer=dfrtnlex)
-    return result
+    print(result)
+    tree = AST(result)
+    res = differentiate(tree)
+    return res
 
 def equation(s):
     result = paran.parse(s, lexer=paranlex)
