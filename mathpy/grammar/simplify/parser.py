@@ -12,7 +12,7 @@ precedence = (
 
 def p_paran(t):
     'e : LP e RP'
-    t[0] = t[2]
+    t[0] = t[1] + t[2] + t[3]
 
 def p_expr(t):
     '''e : e POW e
@@ -75,6 +75,14 @@ def p_expr(t):
                         v1 = '' + str(i)
                         ind = i
                         break
+                    else:
+                        try:
+                            tv1 = left[i][:left[i].index('^')]
+                        except ValueError:
+                            tv1 = left[i]
+                        if tv1 == v2:
+                            v1 = tv1
+                            ind = i
             else:
                 for i in range(0, len(left)):
                     try:
