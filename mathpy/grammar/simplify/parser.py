@@ -135,7 +135,86 @@ def p_expr(t):
             t[0] = t[1]
         else:
             left = t[1].split('+')
-            t[0] = t[1] + t[2] + t[3]
+            n1 = 0.0
+            n2 = 0.0
+            tn1 = 0.0
+            tn2 = 0.0
+            ind = -1
+            fv1 = []
+            fv2 = []
+            for i in range(0, len(left)):
+                try:
+                    n1 = float(left[i])
+                    v1 = ''
+                    break
+                except ValueError:
+                    pass
+            if n1 == 0.0:
+                v1 = t[1]
+            try:
+                n2 = float(t[3])
+                v2 = ''
+            except ValueError:
+                v2 = t[3]
+            if len(v2) != 0:
+                pv2 = v2.split('*')
+                try:
+                    tn2 = float(pv2[0])
+                    try:
+                        pv2.remove(str(tn2))
+                    except ValueError:
+                        try:
+                            pv2.remove(str(int(tn2)))
+                        except ValueError:
+                            pass
+                except ValueError:
+                    tn2 = 1.0
+                fv2 = '*'.join(pv2)
+                for i in range(0, len(left)):
+                    r = re.search(fv2, left[i])
+                    if r:
+                        ind = i
+                        break
+                pv1 = left[ind].split('*')
+                try:
+                    tn1 = float(pv1[0])
+                    try:
+                        pv1.remove(str(tn1))
+                    except ValueError:
+                        try:
+                            pv1.remove(str(int(tn1)))
+                        except ValueError:
+                            pass
+                except ValueError:
+                    tn1 = 1.0
+                if ind != -1:
+                    left[ind] = '*'.join(pv1)
+            if n1 != 0.0:
+                try:
+                    left.remove(str(n1))
+                except ValueError:
+                    try:
+                        left.remove(str(int(n1)))
+                    except ValueError:
+                        pass
+                if n2 != 0.0:
+                    if len(left) == 0:
+                        t[0] = str(n1+n2)
+                    else:
+                        t[0] = '+'.join(left) + '+' + str(n1+n2)
+                else:
+                    if len(left) == 0:
+                        t[0] = v2 + '+' + str(n1)
+                    elif ind != -1 and left[ind] == fv2:
+                        left[ind] = str(tn1+tn2) + '*' + left[ind]
+                        t[0] = '+'.join(left) + '+' + str(n1)
+                    else:
+                        t[0] = '+'.join(left) + '+' + v2 + '+' + str(n1)
+            elif ind != -1 and left[ind] == fv2:
+                left[ind] = str(tn1+tn2) + '*' + left[ind]
+                t[0] = '+'.join(left)
+            else:    
+                t[0] = t[1] + t[2] + t[3]
     elif t[2] == '-':
         if t[1] == '0' and t[3] == '0':
             t[0] = '0'
