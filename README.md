@@ -15,14 +15,6 @@ import mathpy as mp
 ```
 
 ### If any error occurs, check order of parantheses
-#### Example
-Evaluates -> 1 - 4
-
-```python
-print(mp.cal('1+(-4)'))
-    
-(-3+0j)
-```
 
 ## Features
 ### Complex Number Calculation
@@ -67,7 +59,7 @@ Evaluates -> sin(cos((0.4+0.9j)<sup>2</sup>))
 ```python
 print(mp.cal('sin(cos((0.4+0.9j)^2))'))
 
-(0.9447989936113714+0.26124290303222564j)
+(0.944798993611+0.261242903032j)
 ```
 
 Evaluates -> sinh(acosh(acos(tan((0.45+9.8j)<sup>3</sup>))))
@@ -75,7 +67,7 @@ Evaluates -> sinh(acosh(acos(tan((0.45+9.8j)<sup>3</sup>))))
 ```python
 print(mp.cal('sinh(acosh(acos(tan((0.45+9.8j)^3))))'))
 
-(1.3312243736150495+1.0399887655788103j)
+(1.33122437362+1.03998876558j)
 ```
 
 #### Logarithmic
@@ -85,7 +77,7 @@ print(mp.cal('sinh(acosh(acos(tan((0.45+9.8j)^3))))'))
 Evaluates -> log(ln((2+j)<sup>7</sup>), 8)
 
 ```python
-print(mp.cal('log(ln((2+j)^7), 8)'))
+print(mp.cal('log(ln((2+1j)^7), 8)'))
 
 (0.892681167563-0.237832024919j)
 ```
@@ -98,7 +90,7 @@ Evaluates -> e<sup>(sin((0.1+0.8j)<sup>5</sup>))</sup>
 ```python
 print(mp.cal('exp(sin((0.1+0.8j)^5))'))
 
-(1.181087476388017+0.3331524128924987j)
+(1.18108747639+0.333152412892j)
 ```
 
 ### Equations
@@ -113,14 +105,14 @@ Evaluates -> 2x+4 with x -> 2<sup>4</sup>
 ```python
 print(mp.equation('x*2+4;2^4'))
                      
-(36+0j)
+36
 ```
 
 #### Multiple
 Evaluates -> x<sup>2</sup>+y<sup>2</sup>-8 with x -> (1+j)<sup>2</sup> and y -> (2-j)
 
 ```python
-print(mp.equation('x^2+y^2+(-8);(1+j)^2,2-j'))
+print(mp.equation('x^2+y^2-8;(1+1j)^2,2-1j'))
 
 (-9-4j)
 ```
@@ -176,7 +168,7 @@ print(mp.dk('x^2+2*x+1;2'))
 Find all roots for -> x<sup>2</sup>-2x+1 and degree -> 2
 
 ```python
-print(mp.dk('x^2+(-2)*x+1;2', showIter=True))
+print(mp.dk('x^2-2*x+1;2', showIter=True))
 
 Iterations            root0                  root1
    0            1.0000+0.0000j          0.4000+0.9000j
@@ -196,7 +188,7 @@ print(mp.dk('x^8+1;8'))
 Find all roots for -> x<sup>3</sup>-x-2 and degree -> 3
 
 ```python
-print(mp.dk('x^3-x+(-2);3', showIter=True))
+print(mp.dk('x^3-x-2;3', showIter=True))
 
 Iterations            root0                  root1                   root2
    0            1.0000+0.0000j          0.4000+0.9000j          -0.6500+0.7200j
@@ -285,7 +277,7 @@ Function name -> bm(string, a, b, maxIter, showIter, plotGraph)
 Find 1 root for -> x<sup>3</sup>-x-2 in (1, 2)
 
 ```python
-print(mp.bm('x^3-x+(-2)', a=1, b=2, showIter=True))
+print(mp.bm('x^3-x-2', a=1, b=2, showIter=True))
 
 Iterations        a       b       c       cval
     0           1.0000  2.0000  1.5000  -0.1250
@@ -349,7 +341,7 @@ Find 1 root for -> x<sup>3</sup>-x-2 in (1, 2)
 Plots equation and root in browser and automatically show the plot
 
 ```python
-print(mp.rf('x^3-x+(-2)', a=1, b=2, showIter=True, plotGraph=True))
+print(mp.rf('x^3-x-2', a=1, b=2, showIter=True, plotGraph=True))
 
 Iterations        a       b       c       f(a)*f(c)
     0           1.0000  2.0000  1.3333     1.9259

@@ -37,7 +37,7 @@ def bm(s, a, b, maxIter=100, showIter=False, plotGraph=False):
             vals = []
             if plotGraph == True:
                 vals = [[root], [0]]
-                plot(res, name=s, val=vals, valname='Root (Bisection Method)')
+                plot(s, name=s, val=vals, valname='Root (Bisection Method)')
             return root
 
 def rf(s, a, b, maxIter=100, showIter=False, plotGraph=False):
@@ -56,5 +56,5 @@ def rf(s, a, b, maxIter=100, showIter=False, plotGraph=False):
             vals = []
             if plotGraph == True:
                 vals = [[root], [0]]
-                plot(res, name=s, val=vals, valname='Roots (Regula Falsi Method)')
+                plot(s, name=s, val=vals, valname='Roots (Regula Falsi Method)')
             return root

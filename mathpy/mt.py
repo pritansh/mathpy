@@ -34,11 +34,11 @@ def equation(s):
     return eval(result)
 
 def plot(s, min=-100.0, max=100.0, name='Plot', val=[], valname='vals'):
-    step = 0.5
+    step = 0.7
     x = []
     y = []
     t = min
-    while t != max:
+    while t <= max:
         x.append(t)
         t+= step
     for e in x:
