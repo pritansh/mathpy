@@ -1,4 +1,5 @@
 import re
+from cmath import sin, cos, tan, asin, acos, atan, sinh, cosh, tanh, asinh, acosh, atanh, exp, log
 from plotly import tools
 from plotly.offline import plot as ply
 import plotly.graph_objs as go
@@ -11,10 +12,12 @@ except OSError:
 
 def cal(s):
     result = s.replace('^', '**')
+    result = result.replace('ln', 'log')
     return eval(result)
 
 def equation(s):
     result = s.replace('^', '**')
+    result = result.replace('ln', 'log')
     try:
         if result.index(';'):
             parts = result.split(';')
