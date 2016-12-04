@@ -1,11 +1,4 @@
 import re
-from mathpy.grammar.complex.lexer import lexer as cmpxlex
-from mathpy.grammar.paranthesis.lexer import lexer as paranlex
-from mathpy.grammar.differentiation.lexer import lexer as dfrtnlex
-from mathpy.grammar.complex.parser import parser as cmpx
-from mathpy.grammar.paranthesis.parser import parser as paran
-from mathpy.grammar.differentiation.parser import parser as dfrtn
-from mathpy.helper.derivative import Derivative, Node, AST, differentiate
 from plotly import tools
 from plotly.offline import plot as ply
 import plotly.graph_objs as go
@@ -17,20 +10,11 @@ except OSError:
     pass
 
 def cal(s):
-    s = paran.parse(s, lexer=paranlex)
-    result = cmpx.parse(s, lexer=cmpxlex)
-    return result
-
-def diff(s):
-    s = paran.parse(s, lexer=paranlex)
-    result = dfrtn.parse(s, lexer=dfrtnlex)
-    print(result)
-    tree = AST(result)
-    res = differentiate(tree)
-    return res
+    result = s.replace('^', '**')
+    return eval(result)
 
 def equation(s):
-    result = paran.parse(s, lexer=paranlex)
+    result = s.replace('^', '**')
     try:
         if result.index(';'):
             parts = result.split(';')
@@ -38,15 +22,13 @@ def equation(s):
             unique = sorted(set(chars), key=chars.index)
             vals = parts[1].split(',')
             for i in range(0, len(unique)):
-                vals[i] = str(cmpx.parse(vals[i], lexer=cmpxlex))
-                vals[i] = vals[i].replace('(', '')
-                vals[i] = vals[i].replace(')', '')
+                vals[i] = str(eval(vals[i]))
                 parts[0] = parts[0].replace(unique[i], vals[i])
-            res = cmpx.parse(parts[0], lexer=cmpxlex)
+            res = eval(parts[0])
             return res
     except ValueError:
         pass
-    return result
+    return eval(result)
 
 def plot(s, min=-100.0, max=100.0, name='Plot', val=[], valname='vals'):
     step = 0.5
